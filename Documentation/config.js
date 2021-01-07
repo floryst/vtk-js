@@ -16,7 +16,7 @@ module.exports = {
     timezone: 'UTC',
     url: 'https://kitware.github.io/vtk-js',
     root: '/vtk-js/',
-    github: 'kitware/vtk-js',
+    github: 'floryst/vtk-js',
     google_analytics: 'UA-90338862-1',
   },
   parallelWebpack: {
