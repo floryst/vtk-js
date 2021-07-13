@@ -1,7 +1,7 @@
 title: Creating a new class in vtk.js
 ---
 
-This guide illustrates how to add new classes to the vtk.js repository and the concepts behind the infrastructure we use.
+This guide illustrates how to add new classes to the vtk.js repository and the concepts behind the infrastructure we use. All code in this document relies on the `@kitware/vtk.js` package.
 
 First of all, vtk.js does not rely on the class definition that was brought in with the ES6 specification. Instead, vtk.js provides a closure based infrastructure which lets us compose methods into specific instances without any hierarchical constraint.
 Due to our closure paradigm methods can be used outside of their instance context and can be directly be passed as callbacks. Therefore their usage does not require `this` to be referenced each time.
@@ -9,7 +9,7 @@ Due to our closure paradigm methods can be used outside of their instance contex
 By convention, we create a directory for each of our class. The name of the directory must be the name of the class capitalized without its "vtk" prefix (although when importing a class, we will add the "vtk" prefix). The definition of that class should be held in an "index.js" file within that directory.
 
 ```js
-import vtkDataSet from 'vtk.js/Sources/Common/DataModel/DataSet';
+import vtkDataSet from '@kitware/vtk.js/Common/DataModel/DataSet';
 ```
 
 The reason to use a directory instead of a simple JavaScript file is to enable the association of several resources to a specific class like a constants file, several tests, an example, and/or additional documentation.
@@ -46,11 +46,11 @@ This [blog](https://medium.com/@kentcdodds/classes-complexity-and-functional-pro
 
 
 ```js MyClass/index.js
-import macro          from 'vtk.js/macro';
-import vtk            from 'vtk.js/vtk';
-import vtkParentClass from 'vtk.js/Kit/Module/ParentClass';
-import vtkOtherClass  from 'vtk.js/Kit/Module/OtherClass';
-import Constants      from 'vtk.js/Kit/Module/MyClass/Constants';
+import macro          from '@kitware/vtk.js/macros';
+import vtk            from '@kitware/vtk.js/vtk';
+import vtkParentClass from '@kitware/vtk.js/Kit/Module/ParentClass';
+import vtkOtherClass  from '@kitware/vtk.js/Kit/Module/OtherClass';
+import Constants      from '@kitware/vtk.js/Kit/Module/MyClass/Constants';
 
 const { Representation } = Constants;  // { POINT: 0, WIREFRAME: 1, ... }
 
@@ -145,7 +145,7 @@ export function extend(publicAPI, model, initialValues = {}) {
     { name: 'myProp6', enum: Representation, type: 'enum' },
   ]);
 
-  // For more macro methods, see "Sources/macro.js"
+  // For more macro methods, see "Sources/macros.js"
 
   // Object specific methods
   vtkMyClass(publicAPI, model);
@@ -189,7 +189,7 @@ For that you need to add an __api.md__ within the class directory like the follo
 ## Usage
 
 ```js
-import ConeSource from 'vtk.js/Sources/Filters/Sources/ConeSource';
+import ConeSource from '@kitware/vtk.js/Filters/Sources/ConeSource';
 
 const coneSource = ConeSource.New({ height: 2, radius: 1, resolution: 80 });
 const polydata = coneSource.getOutputData();

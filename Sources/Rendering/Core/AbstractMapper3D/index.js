@@ -1,4 +1,4 @@
-import macro from 'vtk.js/Sources/macro';
+import macro from 'vtk.js/Sources/macros';
 
 import vtkAbstractMapper from 'vtk.js/Sources/Rendering/Core/AbstractMapper';
 import * as vtkMath from 'vtk.js/Sources/Common/Core/Math';
